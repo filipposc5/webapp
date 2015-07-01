@@ -1,0 +1,7 @@
+# this isn't really used anywhere since we switched from supervisord to supervisor
+command=/opt/venv/app/bin/python /opt/venv/app/FlaskWebServer.py
+directory=/opt/venv/app
+redirect_stderr=true
+startsecs=5
+autorestart=true
+stdout_logfile=/opt/venv/app/flask.stdout.log
