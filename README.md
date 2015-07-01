@@ -123,16 +123,16 @@ Current features
 
 Improvements (if time was not a constraint)
 -----
-  I added a configuration parameter file for port to flask-hello app that could 've been using config template  
-  Additional networking eg make main node have a public interface or forwarded port, and/or firewall the public interface  
-  Better testing, I discovered the serverspec extra types that could test the web service a bit late into the game. Originally I was thinking of phantomjs or selenium or similar, but that might be overkill in the cloud where memory might be a scarce commodity.  
-  A bit more structure in the config management, more use of "roles" etc, better base system config (eg ntp, hardening)  
-  A more uniform idea for the app eg reusability of names end to end etc  
-  Centralised logging  
-  Centralised testing (eg have a node register in a pool, and register what sort of tests they would run against it)  
-  What if recipes are a bit uniform, what if it would be possible to automate some of the testing via analysing config files? Ie if a skeleton is provided for say a Flask app which contains a port, you already know that you need to test if that port is listening.  
-  If Large scale deployment it might be worth creating a chef recipe to build a release, and then just release the final app on the end nodes. This way you only have to troubleshoot once (hopefully)   
-  If very large scale deployment, provide own boxes and move the config management on the box build level.   
+* I added a configuration parameter file for port to flask-hello app that could 've been using config template  
+* Additional networking eg make main node have a public interface or forwarded port, and/or firewall the public interface  
+* Better testing, I discovered the serverspec extra types that could test the web service a bit late into the game. Originally I was thinking of phantomjs or selenium or similar, but that might be overkill in the cloud where memory might be a scarce commodity.  
+* A bit more structure in the config management, more use of "roles" etc, better base system config (eg ntp, hardening)  
+* A more uniform idea for the app eg reusability of names end to end etc  
+* Centralised logging  
+* Centralised testing (eg have a node register in a pool, and register what sort of tests they would run against it)  
+* What if recipes are a bit uniform, what if it would be possible to automate some of the testing via analysing config files? Ie if a skeleton is provided for say a Flask app which contains a port, you already know that you need to test if that port is listening.  
+* If Large scale deployment it might be worth creating a chef recipe to build a release, and then just release the final app on the end nodes. This way you only have to troubleshoot once (hopefully)   
+* If very large scale deployment, provide own boxes and move the config management on the box build level.   
 
 
 ## 6. Appendix: Random thoughts and troubleshooting
@@ -141,7 +141,7 @@ Sometimes vagrant status takes a long time. This is because it is trying to reso
 
 If hosts arent getting deleted from chef-zero it means that 'knife' is not working on the vagrant host (outside of VMs).   
 
-Inconsistent behaviours
+Inconsistent behaviour
 -------
 Vagrant on windows runs chef zero on 127.0.0.1:8889 within the VM and maps cookbooks and such under /tmp while in OSX vagrant runs it outside of the VM. This was a bit of a problem because originally I used this method:  
  I asked for a chef zero provision with an empty run list such that I delegate the Chef installation to Vagrant. The benefit is that by allowing vagrant to do the installation I can be sure that it will always happen in a similar fashion. Then after chef gets installed I bring up my own chef zero which I share amongst nodes. Admittedly it might be considered a bit of a hack but for a decent reason, delegating sounds like a great idea in general!  
