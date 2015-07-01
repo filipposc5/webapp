@@ -30,10 +30,10 @@
   Install vagrant (and virtual box if needed)  
   use homebrew for chef:  
     ```
-    # install chefdk  
-    # https://blog.osgiliath.net/?p=508  
-    brew install caskroom/cask/brew-cask  
-    brew cask install chefdk  
+    # install chefdk    
+    # https://blog.osgiliath.net/?p=508   
+    brew install caskroom/cask/brew-cask   
+    brew cask install chefdk   
     ```
 *Linux*:
   might need caution in the chef/vagrant versions as some distros might be lagging behind 
