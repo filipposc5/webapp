@@ -69,7 +69,7 @@ eg to bring nodes 1-3 up:
 ```
 vagrant up hello-node1 hello-node2 hello-node3
 ```
-### update configs etc  
+### Update configs  
 To update hello-main so that nodeX exists and gets added to load balancer you will need to reprovision with chef eg  
 ```
 vagrant provision --provision-with chef_client hello-main
@@ -78,15 +78,15 @@ To retest use shell provisioner again. Eitherway both chef and shell should be i
 *WARNING*: Sometimes it takes a while for node IP info to make it into chef-zero. This is why in 'main' node we run chef client once with empty list just to register itself.   
 
 ## 4. Assumptions
-	A maximum of 100 nodes with current Vagrantfile but we only 'pre-create' 10 of them. This is configurable via  
-		nodes = 10
-	Main node will be at 172.16.100.10  
-	Node X will be at 172.16.100.100+ X - so node1 : 172.16.100.101 (this is printed during node#1 shell provisioning as well)  
-	App is listening on port 3001 on every vm (both main and node)  
-	Nginx loadbalancer is listening at port 81 on main node  
-	Multiple up/down for hello-main node should only download the .deb file once  
-    The "app" will always reload from git, this is per-design  
-    Running knife as vagrant user from main node also uses the main node chef zero as url  
+A maximum of 100 nodes with current Vagrantfile but we only 'pre-create' 10 of them. This is configurable via  
+nodes = 10
+Main node will be at 172.16.100.10  
+Node X will be at 172.16.100.100+ X - so node1 : 172.16.100.101 (this is printed during node#1 shell provisioning as well)  
+App is listening on port 3001 on every vm (both main and node)  
+Nginx loadbalancer is listening at port 81 on main node  
+Multiple up/down for hello-main node should only download the .deb file once  
+The "app" will always reload from git, this is per-design  
+Running knife as vagrant user from main node also uses the main node chef zero as url 
 
 Average run time on fast machines is just under 270 seconds including downloads. (S3 speeds are terrible)
 Updating nginx configs after more nodes have joined the party takes about 70 seconds 
