@@ -1,4 +1,5 @@
-0. What's cool about this? (short description for the busy people)
+1. What's cool about this? (short description for the busy people)
+------
   chef reusability in many scenarios (standalone/enterprise/lab etc)  
   app nodes can join after main is up, so dynamic setup (pending main node reprovision)  
   dynamic discovery and testing (with possibility to extend) for additional nodes  
