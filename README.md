@@ -2,15 +2,15 @@
 
 ## 1. What's cool about this? (short description for the busy people)
 ------
-  chef reusability in many scenarios (standalone/enterprise/lab etc)  
-  app nodes can join after main is up, so dynamic setup (pending main node reprovision)  
-  dynamic discovery and testing (with possibility to extend) for additional nodes  
-  works on my box, hopefully works on your box, but tested and works in osx AND windows  
-  recipe and app itself leverage features (virtualenv/git) for possible complex / multi-app scenarios  
-  You ask for 2 nodes I give you 10, up to 100!  
-  I did not pick a python solution (my python > my ruby) so that I am outside of my comfort zone   
-  No blind copy pasting, no shortcuts   
-  A lot of testing has gone into it (it may still not be perfect)   
+- Chef reusability in many scenarios (standalone/enterprise/lab etc)  
+- App nodes can join after main is up, so dynamic setup (pending main node reprovision)  
+- Dynamic discovery and testing (with possibility to extend) for additional nodes  
+- Works on my box, hopefully works on your box, but tested and works in osx AND windows  
+- Recipe and app itself leverage features (virtualenv/git) for possible complex / multi-app scenarios  
+- You ask for 2 nodes I give you 10, up to 100!  
+- I did not pick a python solution (my python > my ruby) so that I am outside of my comfort zone   
+- No blind copy pasting, no shortcuts   
+- A lot of testing has gone into it (it may still not be perfect)   
 
 ## 2. Setup instructions
 -------
