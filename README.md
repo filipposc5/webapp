@@ -1,17 +1,18 @@
 0. What's cool about this? (short description for the busy people)
-  chef reusability in many scenarios (standalone/enterprise/lab etc)
-  app nodes can join after main is up, so dynamic setup (pending main node reprovision)
-  dynamic discovery and testing (with possibility to extend) for additional nodes
-  works on my box, hopefully works on your box, but tested and works in osx AND windows
-  recipe and app itself leverage features (virtualenv/git) for possible complex / multi-app scenarios
-  You ask for 2 nodes I give you 10, up to 100!
-  I did not pick a python solution (my python > my ruby) so that I am outside of my comfort zone
-  No blind copy pasting, no shortcuts
-  A lot of testing has gone into it (it may still not be perfect)
+  chef reusability in many scenarios (standalone/enterprise/lab etc)  
+  app nodes can join after main is up, so dynamic setup (pending main node reprovision)  
+  dynamic discovery and testing (with possibility to extend) for additional nodes  
+  works on my box, hopefully works on your box, but tested and works in osx AND windows  
+  recipe and app itself leverage features (virtualenv/git) for possible complex / multi-app scenarios  
+  You ask for 2 nodes I give you 10, up to 100!  
+  I did not pick a python solution (my python > my ruby) so that I am outside of my comfort zone  
+  No blind copy pasting, no shortcuts  
+  A lot of testing has gone into it (it may still not be perfect)  
 
 1. Setup instructions
 
 Requirements
+-----------
 - Chef/ChefDK/knife (latest) 
 - Vagrant (latest)
 - The above are about 200-300mbyte download (in case you are on 3G / 4G )
