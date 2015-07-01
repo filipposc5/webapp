@@ -1,7 +1,6 @@
-Webapp with chef and vagrant
-===================
+# Webapp with chef and vagrant
 
-1. What's cool about this? (short description for the busy people)
+## 1. What's cool about this? (short description for the busy people)
 ------
   chef reusability in many scenarios (standalone/enterprise/lab etc)  
   app nodes can join after main is up, so dynamic setup (pending main node reprovision)  
@@ -13,11 +12,10 @@ Webapp with chef and vagrant
   No blind copy pasting, no shortcuts   
   A lot of testing has gone into it (it may still not be perfect)   
 
-2. Setup instructions
+## 2. Setup instructions
 -------
 
-Requirements
------------
+###Requirements
 - Chef/ChefDK/knife (latest) 
 - Vagrant (latest)
 - The above are about 200-300mbyte download (in case you are on 3G / 4G )
@@ -31,83 +29,99 @@ Requirements
 *OSX*: 
   Install vagrant (and virtual box if needed)  
   use homebrew for chef:  
-    `````
+    ```
     # install chefdk  
     # https://blog.osgiliath.net/?p=508  
     brew install caskroom/cask/brew-cask  
     brew cask install chefdk  
-    `````
-Linux:
+    ```
+*Linux*:
   might need caution in the chef/vagrant versions as some distros might be lagging behind 
 
 
-ALL OS:
+*ALL OS*:
   install needed vagrant plugins: 
+  ```
   vagrant plugin install vagrant-omnibus
-  vagrant plugin install vagrant-triggers (not really used)
-  (if caching needed vagrant-cachier is recommended as chef is a 40MByte dl)
+  # not really used, but explored
+  vagrant plugin install vagrant-triggers 
+  ```
+  (if caching needed vagrant-cachier is recommended as chef is a 40MByte dl)  
 
-Testing
-  It has been tested on (and adjusted to work on both)
-   Windows 8.1 Pro with Chef 12.2.1 and Vagrant 1.7.2
-   Osx 10.9.5 with Chef from brew/cask as below and with Vagrant 1.7.2 from vagrant.com 
-      Chef Development Kit Version: 0.6.2
-      chef-client version: 12.3.0
-      berks version: 3.2.4
-      kitchen version: 1.4.0
+###Testing
+  It has been tested on (and adjusted to work on both)  
+   Windows 8.1 Pro with Chef 12.2.1 and Vagrant 1.7.2  
+   Osx 10.9.5 with Chef from brew/cask as below and with Vagrant 1.7.2 from vagrant.com   
+      Chef Development Kit Version: 0.6.2  
+      chef-client version: 12.3.0  
+      berks version: 3.2.4  
+      kitchen version: 1.4.0  
 
-2. Usage
-  Bring up hosts 
+## 3. Usage
+  ### Bring up hosts 
+    ```
     vagrant status
     vagrant up hello-main
-    vagrant up hello-node[1-10] eg: "vagrant up hello-node1 hello-node2 hello-node3" to bring nodes 1-3 up
+    vagrant up hello-node[1-10] 
+    ```
+    eg to bring nodes 1-3 up: 
+    ```
+    vagrant up hello-node1 hello-node2 hello-node3
+    ```
+  ### update configs etc  
   To update hello-main so that nodeX exists and gets added to load balancer you will need to reprovision with chef eg
+    ```
     vagrant provision --provision-with chef_client hello-main
-    To retest use shell provisioner again. Eitherway both chef and shell should be idempotent
-    WARNING: Sometimes it takes a while for node IP info to make it into chef-zero. This is why in 'main' node we run chef client once with empty list just to register itself. 
+    ```
+    To retest use shell provisioner again. Eitherway both chef and shell should be idempotent  
+    *WARNING*: Sometimes it takes a while for node IP info to make it into chef-zero. This is why in 'main' node we run chef client once with empty list just to register itself.   
 
-3. Assumptions
-	A maximum of 100 nodes with current Vagrantfile but we only 'pre-create' 10 of them. This is configurable via
+## 4. Assumptions
+	A maximum of 100 nodes with current Vagrantfile but we only 'pre-create' 10 of them. This is configurable via  
 		nodes = 10
-	Main node will be at 172.16.100.10 
-	Node X will be at 172.16.100.100+ X - so node1 : 172.16.100.101 (this is printed during node#1 shell provisioning as well)
-	App is listening on port 3001 on every vm (both main and node)
-	Nginx loadbalancer is listening at port 81 on main node
-	Multiple up/down for hello-main node should only download the .deb file once
-    The "app" will always reload from git, this is per-design
-    Running knife as vagrant user from main node also uses the main node chef zero
+	Main node will be at 172.16.100.10  
+	Node X will be at 172.16.100.100+ X - so node1 : 172.16.100.101 (this is printed during node#1 shell provisioning as well)  
+	App is listening on port 3001 on every vm (both main and node)  
+	Nginx loadbalancer is listening at port 81 on main node  
+	Multiple up/down for hello-main node should only download the .deb file once  
+    The "app" will always reload from git, this is per-design  
+    Running knife as vagrant user from main node also uses the main node chef zero as url  
 
 Average run time on fast machines is just under 270 seconds including downloads. (S3 speeds are terrible)
 Updating nginx configs after more nodes have joined the party takes about 70 seconds 
 
-4. While you wait .. 
+## 5. While you wait .. 
 
-Objectives behind technology choices
+Objectives behind technology choices  
 * Refresh ruby / chef knowledge
 * Use chef zero (not used before)
 * Avoid using static JSONs 
 
 Why chef zero? 
-  can be used to emulate a real server or real environment, as well as a standalone instance eg just a chef solo / zero without server
-  ability to use node attributes in a DYNAMIC fashion such that subsequent chef provisions refresh nginx LB configuration
-  ability to further leverage node awareness in order to test against these nodes (eg knife node stuff in serverspec)
-  ability to port recipes, test everything locally and properly, create more persistent scenarios if needed
-  ability to edit/upload recipes and have an easy dev cycle 
+------
+  can be used to emulate a real server or real environment, as well as a standalone instance eg just a chef solo / zero without server  
+  ability to use node attributes in a DYNAMIC fashion such that subsequent chef provisions refresh nginx LB configuration  
+  ability to further leverage node awareness in order to test against these nodes (eg knife node stuff in serverspec)  
+  ability to port recipes, test everything locally and properly, create more persistent scenarios if needed  
+  ability to edit/upload recipes and have an easy dev cycle   
 
 
 Drawback
+-----
   May have hit some swapping at 512MB ram at times!
   Hit issues specific to vagrant/chef across win/osx and issues around chef zero provisioning 
 
 Current features
-  Support for arbitrary nodes
-  Custom recipe for flask application that installs virtualenv, supervisord, service for supervisord with notifications for templates (chef-repo/hello-app/ ) and cloning from git 
-  All the benefits from "Why Chef Zero" , multiple 'knife' envs to keep configuration as static or as dynamic as needed, eg a lot of the devops dev occurred on 'main' node so an easy dev environment as well
-  Ability to use vagrant triggers to be more automated, though personally it felt a bit like a hack so I avoided it in the end (and not as portable when it came to Windows but an avenue worth exploring at times)
-  Demonstration that json structures could have been used in case we wanted a simpler solution
+------
+  Support for arbitrary nodes  
+  Custom recipe for flask application that installs virtualenv, supervisord, service for supervisord with notifications for templates (chef-repo/hello-app/ ) and cloning from git   
+  All the benefits from "Why Chef Zero" , multiple 'knife' envs to keep configuration as static or as dynamic as needed, eg a lot of the devops dev occurred on 'main' node so an easy dev environment as well  
+  Ability to use vagrant triggers to be more automated, though personally it felt a bit like a hack so I avoided it in the end (and not as portable when it came to Windows but an avenue worth exploring at times)  
+  Demonstration that json structures could have been used in case we wanted a simpler solution  
 
 
 Improvements (if time was not a constraint)
+-----
   I added a configuration parameter file for port to flask-hello app that could 've been using config template
   Additional networking eg make main node have a public interface or forwarded port, and/or firewall the public interface
   Better testing, I discovered the serverspec extra types that could test the web service a bit late into the game. Originally I was thinking of phantomjs or selenium or similar, but that might be overkill in the cloud where memory might be a scarce commodity. 
