@@ -59,23 +59,23 @@
       kitchen version: 1.4.0  
 
 ## 3. Usage
-  ### Bring up hosts  
-  ```
-  vagrant status
-  vagrant up hello-main
-  vagrant up hello-node[1-10] 
-  ```
-  eg to bring nodes 1-3 up:  
-  ```
-  vagrant up hello-node1 hello-node2 hello-node3
-  ```
-  ### update configs etc  
-  To update hello-main so that nodeX exists and gets added to load balancer you will need to reprovision with chef eg  
-  ```
-  vagrant provision --provision-with chef_client hello-main
-  ```
-    To retest use shell provisioner again. Eitherway both chef and shell should be idempotent  
-    *WARNING*: Sometimes it takes a while for node IP info to make it into chef-zero. This is why in 'main' node we run chef client once with empty list just to register itself.   
+### Bring up hosts  
+```
+vagrant status
+vagrant up hello-main
+vagrant up hello-node[1-10] 
+```
+eg to bring nodes 1-3 up:  
+```
+vagrant up hello-node1 hello-node2 hello-node3
+```
+### update configs etc  
+To update hello-main so that nodeX exists and gets added to load balancer you will need to reprovision with chef eg  
+```
+vagrant provision --provision-with chef_client hello-main
+```
+To retest use shell provisioner again. Eitherway both chef and shell should be idempotent  
+*WARNING*: Sometimes it takes a while for node IP info to make it into chef-zero. This is why in 'main' node we run chef client once with empty list just to register itself.   
 
 ## 4. Assumptions
 	A maximum of 100 nodes with current Vagrantfile but we only 'pre-create' 10 of them. This is configurable via  
