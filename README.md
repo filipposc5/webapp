@@ -15,7 +15,7 @@
 ## 2. Setup instructions
 -------
 
-###Requirements
+####Requirements
 - Chef/ChefDK/knife (latest) 
 - Vagrant (latest)
 - The above are about 200-300mbyte download (in case you are on 3G / 4G )
@@ -49,7 +49,7 @@
   ```
   (if caching needed vagrant-cachier is recommended as chef is a 40MByte dl)  
 
-###Testing
+####Testing
   It has been tested on (and adjusted to work on both)  
    Windows 8.1 Pro with Chef 12.2.1 and Vagrant 1.7.2  
    Osx 10.9.5 with Chef from brew/cask as below and with Vagrant 1.7.2 from vagrant.com   
@@ -59,21 +59,21 @@
       kitchen version: 1.4.0  
 
 ## 3. Usage
-  ### Bring up hosts 
-    ```
-    vagrant status
-    vagrant up hello-main
-    vagrant up hello-node[1-10] 
-    ```
-    eg to bring nodes 1-3 up: 
-    ```
-    vagrant up hello-node1 hello-node2 hello-node3
-    ```
+  ### Bring up hosts  
+  ```
+  vagrant status
+  vagrant up hello-main
+  vagrant up hello-node[1-10] 
+  ```
+  eg to bring nodes 1-3 up:  
+  ```
+  vagrant up hello-node1 hello-node2 hello-node3
+  ```
   ### update configs etc  
-  To update hello-main so that nodeX exists and gets added to load balancer you will need to reprovision with chef eg
-    ```
-    vagrant provision --provision-with chef_client hello-main
-    ```
+  To update hello-main so that nodeX exists and gets added to load balancer you will need to reprovision with chef eg  
+  ```
+  vagrant provision --provision-with chef_client hello-main
+  ```
     To retest use shell provisioner again. Eitherway both chef and shell should be idempotent  
     *WARNING*: Sometimes it takes a while for node IP info to make it into chef-zero. This is why in 'main' node we run chef client once with empty list just to register itself.   
 
