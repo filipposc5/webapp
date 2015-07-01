@@ -109,8 +109,9 @@ Why chef zero?
 
 Drawback
 -----
-  May have hit some swapping at 512MB ram at times!
-  Hit issues specific to vagrant/chef across win/osx and issues around chef zero provisioning 
+
+  May have hit some swapping at 512MB ram at times!  
+  Hit issues specific to vagrant/chef across win/osx and issues around chef zero provisioning  
 
 Current features
 ------
