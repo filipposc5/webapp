@@ -1,3 +1,6 @@
+Webapp with chef and vagrant
+===================
+
 1. What's cool about this? (short description for the busy people)
 ------
   chef reusability in many scenarios (standalone/enterprise/lab etc)  
@@ -6,11 +9,12 @@
   works on my box, hopefully works on your box, but tested and works in osx AND windows  
   recipe and app itself leverage features (virtualenv/git) for possible complex / multi-app scenarios  
   You ask for 2 nodes I give you 10, up to 100!  
-  I did not pick a python solution (my python > my ruby) so that I am outside of my comfort zone  
-  No blind copy pasting, no shortcuts  
-  A lot of testing has gone into it (it may still not be perfect)  
+  I did not pick a python solution (my python > my ruby) so that I am outside of my comfort zone   
+  No blind copy pasting, no shortcuts   
+  A lot of testing has gone into it (it may still not be perfect)   
 
-1. Setup instructions
+2. Setup instructions
+-------
 
 Requirements
 -----------
@@ -19,19 +23,20 @@ Requirements
 - The above are about 200-300mbyte download (in case you are on 3G / 4G )
 - Virtualbox (realistically it's already there!)
 
-Windows: 
+*Windows*: 
   Install vagrant (and virtual box if needed)
   Install Chef for Windows
   Git may be needed if messing with the recipes
 
-OSX: 
-  Install vagrant (and virtual box if needed)
-  use homebrew for chef:
-    # install chefdk
-    # https://blog.osgiliath.net/?p=508
-    brew install caskroom/cask/brew-cask
-    brew cask install chefdk
-
+*OSX*: 
+  Install vagrant (and virtual box if needed)  
+  use homebrew for chef:  
+    `````
+    # install chefdk  
+    # https://blog.osgiliath.net/?p=508  
+    brew install caskroom/cask/brew-cask  
+    brew cask install chefdk  
+    `````
 Linux:
   might need caution in the chef/vagrant versions as some distros might be lagging behind 
 
