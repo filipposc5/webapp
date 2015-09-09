@@ -111,7 +111,7 @@ Vagrant.configure(2) do |config|
       echo Hostname: ${HOSTNAME}
       sed -i 's/..\.archive\./gb.archive\./g' /etc/apt/sources.list
       echo '============='
-      echo '==='
+      echo '=-='
       #apt-get update
       if [ ! -d /opt/chef/embedded ]; then 
         curl -L https://www.opscode.com/chef/install.sh -o install2.sh && sudo bash install2.sh -d /vagrant/cache 
@@ -150,7 +150,7 @@ Vagrant.configure(2) do |config|
       echo main chef zero should be up by now
 
       # uncomment bellow if you want to always upload recipes (use while developing recipes)
-      #knife cookbook upload --all 
+      knife cookbook upload --all 
     SHELL
      # provision with chef client now against our newly formed chef server
      # To install vagrant-triggers plugin, simply run :
